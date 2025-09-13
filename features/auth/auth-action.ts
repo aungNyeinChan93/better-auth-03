@@ -35,8 +35,15 @@ export async function registerAction(initialState: any, formData: FormData) {
     const { success: z_success, data: valitadeFields, error: zErr } = await RegisterSchema.safeParseAsync({ name, email, password })
 
     if (!z_success) {
-        return { success: false, errors: { other: zErr?.message } }
+        return {
+            success: false, errors: {
+                name: zErr.format().name?._errors[0],
+                email: zErr.format().email?._errors[0],
+                password: zErr.format().password?._errors[0],
+            }
+        }
     }
+
     try {
         const { user } = z_success && await auth.api.signUpEmail({ body: { ...valitadeFields } })
         if (!user) {
