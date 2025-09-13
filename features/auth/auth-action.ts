@@ -32,7 +32,7 @@ export async function registerAction(initialState: any, formData: FormData) {
     };
 
     try {
-        const { user } = await auth.api.signUpEmail({ body: { name, email, password, callbackURL: '/login' } })
+        const { user } = await auth.api.signUpEmail({ body: { name, email, password } })
         if (!user) {
             errors.other = 'register fail!'
             return { success: false, errors }

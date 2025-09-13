@@ -11,7 +11,7 @@ export const auth = betterAuth({
     plugins: [nextCookies()],
     emailAndPassword: {
         enabled: true,
-        autoSignIn: true
+        autoSignIn: false
     },
     socialProviders: {
         github: {
@@ -19,4 +19,13 @@ export const auth = betterAuth({
             clientSecret: process.env.GITHUB_CLIENT_SECRET as string,
         },
     },
+    user: {
+        additionalFields: {
+            role: {
+                type: "string",
+                input: false,
+                defaultValue: 'user'
+            }
+        }
+    }
 });
