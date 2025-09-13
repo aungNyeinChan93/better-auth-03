@@ -25,6 +25,7 @@ const NavbarComponent = ({ session }: Props) => {
     { name: "home", path: "/" },
     { name: "profile", path: "/profile" },
     { name: "products", path: "/tests/products" },
+    { name: "users", path: "/users" },
   ];
 
   const pathname = usePathname();
