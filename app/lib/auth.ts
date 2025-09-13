@@ -27,5 +27,6 @@ export const auth = betterAuth({
                 defaultValue: 'user'
             }
         }
-    }
+    },
+
 });

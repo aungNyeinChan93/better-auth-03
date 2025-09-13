@@ -2,7 +2,7 @@
 
 import { auth } from "@/app/lib/auth";
 import { success } from "better-auth";
-
+import { RegisterSchema } from "@/lib/zod/z-schema";
 
 interface Errors {
     name?: string,
@@ -18,21 +18,27 @@ export async function registerAction(initialState: any, formData: FormData) {
 
     const errors: Errors = {}
 
-    if (!name.trim()) {
-        errors.name = 'Name Fields is required'
-    };
-    if (!email.trim()) {
-        errors.email = 'Email Fields is required'
-    };
-    if (!password.trim()) {
-        errors.password = 'Password Fields is required'
-    };
-    if (Object.keys(errors).length > 0) {
-        return { success: false, errors }
-    };
+    // if (!name.trim()) {
+    //     errors.name = 'Name Fields is required'
+    // };
+    // if (!email.trim()) {
+    //     errors.email = 'Email Fields is required'
+    // };
+    // if (!password.trim()) {
+    //     errors.password = 'Password Fields is required'
+    // };
 
+    // if (Object.keys(errors).length > 0) {
+    //     return { success: false, errors }
+    // };
+
+    const { success: z_success, data: valitadeFields, error: zErr } = await RegisterSchema.safeParseAsync({ name, email, password })
+
+    if (!z_success) {
+        return { success: false, errors: { other: zErr?.message } }
+    }
     try {
-        const { user } = await auth.api.signUpEmail({ body: { name, email, password } })
+        const { user } = z_success && await auth.api.signUpEmail({ body: { ...valitadeFields } })
         if (!user) {
             errors.other = 'register fail!'
             return { success: false, errors }
