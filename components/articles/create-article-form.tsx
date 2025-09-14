@@ -13,6 +13,7 @@ import { Textarea } from "../ui/textarea";
 import { Button } from "../ui/button";
 import { createArticleAction } from "@/features/articles/articles-action";
 import { User } from "@/features/auth/auth-helper";
+import { redirect } from "next/navigation";
 
 interface Props {
   user?: User | null;
@@ -23,6 +24,10 @@ const CreatArticleForm = ({ user }: Props) => {
     createArticleAction,
     undefined
   );
+
+  if (state?.success) {
+    return redirect("/articles");
+  }
   return (
     <React.Fragment>
       <main className="w-full p-2 sm:w-[700px]">

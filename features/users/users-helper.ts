@@ -7,7 +7,7 @@ export type Users = Prisma.UserGetPayload<{
 
 export async function getAllUsers(limit?: number) {
     const users: Users | undefined = await prisma?.user.findMany({
-        include: { accounts: true, sessions: true },
+        include: { accounts: true, sessions: true, articles: true },
         orderBy: { createdAt: "desc" },
         take: limit || 10
     })
