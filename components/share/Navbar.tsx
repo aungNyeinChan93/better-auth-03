@@ -23,10 +23,9 @@ const NavbarComponent = ({ session }: Props) => {
 
   const navLinks = [
     { name: "home", path: "/" },
-    { name: "profile", path: "/profile" },
-    { name: "products", path: "/tests/products" },
-    { name: "users", path: "/users" },
     { name: "articles", path: "/articles" },
+    { name: "users", path: "/users" },
+    { name: "profile", path: "/profile" },
   ];
 
   const pathname = usePathname();

@@ -46,3 +46,21 @@ export const LoginSchema = z.object({
     // .regex(/[0-9]/, { message: "Password must contain at least one number" })
     // .regex(/[@$!%*?&]/, { message: "Password must contain at least one special character (@$!%*?&)" }),
 })
+
+
+
+export type NRC = z.infer<typeof NRCSchema>
+export const NRCSchema = z.tuple([z.number(), z.string(), z.number()])
+
+export const SampleUserSchema = z.object({
+    name: z.string({ error: 'name must be string ' }).min(2, {}),
+    phone: z.number(),
+    nrc: NRCSchema,
+    address: z.object()
+});
+
+
+type TsUnion = string | number | undefined | null;
+
+type ZUnion = z.infer<typeof UnionSchema>
+const UnionSchema = z.union([z.string(), z.undefined(), z.number(), z.null(),])

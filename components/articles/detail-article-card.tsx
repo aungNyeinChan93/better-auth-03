@@ -9,10 +9,7 @@ const DetailArticleCard = ({ article }: Props) => {
   return (
     <React.Fragment>
       <section className="w-full sm:w-[400px] md:w-[800px] overflow-auto">
-        <a
-          href="#"
-          className="block rounded-md border border-gray-300 p-4 shadow-sm sm:p-6"
-        >
+        <div className="block rounded-md border border-gray-300 p-4 shadow-sm sm:p-6">
           <div className="sm:flex sm:justify-between sm:gap-4 lg:gap-6">
             <div className="sm:order-last sm:shrink-0">
               <img
@@ -56,7 +53,7 @@ const DetailArticleCard = ({ article }: Props) => {
               </dd>
             </div>
           </dl>
-        </a>
+        </div>
       </section>
     </React.Fragment>
   );
