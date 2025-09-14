@@ -13,11 +13,10 @@ export async function isValidate(user: any) {
 }
 
 
-
 export const RegisterSchema = z.object({
     name: z
         .string()
-        .min(2, { message: "Name must be at least 2 characters long" })
+        .min(1, { message: "Name field is required" })
         .max(19, { message: "Name cannot exceed 19 characters" })
         .regex(/^[a-zA-Z\s]+$/, {
             message: "Name can only contain letters and spaces",
@@ -28,10 +27,22 @@ export const RegisterSchema = z.object({
         .email({ message: "Invalid email address" }),
     password: z
         .string()
-        .min(6, { message: "Password must be at least 6 characters long" })
+        .min(6, { message: "Password must be at least 6 characters long", })
         .max(32, { message: "Password cannot exceed 32 characters" })
-        .regex(/[A-Z]/, { message: "Password must contain at least one uppercase letter" })
-        .regex(/[a-z]/, { message: "Password must contain at least one lowercase letter" })
-        .regex(/[0-9]/, { message: "Password must contain at least one number" })
-        .regex(/[@$!%*?&]/, { message: "Password must contain at least one special character (@$!%*?&)" }),
+    // .regex(/[A-Z]/, { message: "Password must contain at least one uppercase letter" })
+    // .regex(/[a-z]/, { message: "Password must contain at least one lowercase letter" })
+    // .regex(/[0-9]/, { message: "Password must contain at least one number" })
+    // .regex(/[@$!%*?&]/, { message: "Password must contain at least one special character (@$!%*?&)" }),
 });
+
+export const LoginSchema = z.object({
+    email: z.string().min(1, 'email filed is required').email('Invalid email'),
+    password: z
+        .string()
+        .min(1, { message: "Password must be at least 1 characters long", })
+    // .max(32, { message: "Password cannot exceed 32 characters" })
+    // .regex(/[A-Z]/, { message: "Password must contain at least one uppercase letter" })
+    // .regex(/[a-z]/, { message: "Password must contain at least one lowercase letter" })
+    // .regex(/[0-9]/, { message: "Password must contain at least one number" })
+    // .regex(/[@$!%*?&]/, { message: "Password must contain at least one special character (@$!%*?&)" }),
+})

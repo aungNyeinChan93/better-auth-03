@@ -1,6 +1,7 @@
 "use client";
 
 import { authClient } from "@/app/lib/auth-client";
+import { LoginSchema } from "@/lib/zod/z-schema";
 import { email } from "better-auth";
 import { useRouter } from "next/navigation";
 import { FormEvent, useState } from "react";
@@ -17,14 +18,18 @@ export default function LoginForm() {
   const loginSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const { email, password } = form;
-    if (!email?.trim() || !password.trim()) {
-      toast.error("some fields are required!");
+
+    const { success, data: validate, error } = LoginSchema.safeParse(form);
+    if (!success) {
+      toast.error(error.format().email?._errors[0] as string);
+      toast.error(error.format().password?._errors[0] as string);
       return;
     }
+
     try {
       const { data, error } = await authClient.signIn.email({
-        email,
-        password,
+        email: validate?.email as string,
+        password: validate?.password as string,
         callbackURL: "/",
       });
       if (error) {

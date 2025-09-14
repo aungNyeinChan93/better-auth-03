@@ -17,7 +17,6 @@ export async function registerAction(initialState: any, formData: FormData) {
     const password = formData.get('password') as string;
 
     const errors: Errors = {}
-
     // if (!name.trim()) {
     //     errors.name = 'Name Fields is required'
     // };
