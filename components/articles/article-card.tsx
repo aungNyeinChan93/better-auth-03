@@ -34,7 +34,7 @@ const ArticleCard = async ({ article }: Props) => {
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <p className=" line-clamp-4">{article?.body}</p>
+            <p className=" line-clamp-4 leading-relaxed">{article?.body}</p>
           </CardContent>
           <CardFooter>
             <form
@@ -43,7 +43,7 @@ const ArticleCard = async ({ article }: Props) => {
                 await deleteArticleById(article?.id);
               }}
             >
-              <Button asChild variant={"secondary"} className="me-2">
+              <Button asChild variant={"secondary"} className="me-4">
                 <Link href={`/articles/${article?.id}`}>Detail</Link>
               </Button>
               <Button type="submit" variant={"destructive"}>

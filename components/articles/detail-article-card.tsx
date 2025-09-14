@@ -31,7 +31,7 @@ const DetailArticleCard = ({ article }: Props) => {
                 {article?.author?.name}
               </p>
 
-              <p className="mt-4  text-sm text-pretty text-gray-700">
+              <p className="mt-4  text-sm text-pretty text-gray-700 leading-loose">
                 {article?.body}
               </p>
             </div>
